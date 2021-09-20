@@ -1,60 +1,39 @@
+class Ball{
+  constructor(x,y,w,h,vx,vy,c){
+    this.h = h;
+    this.w = w;
+    this.x = x;
+    this.y = y;
+    this.vx = vx;
+    this.vy = vy;
+    this.c = c;
+  }
+
+  draw() {
+    fill(this.c);
+    ellipse(this.x,this.y,20,20);
+    this.x = this.x + this.vx;
+    this.y = this.y + this.vy;
+
+    if(this.x < 25 || this.x >= 475){
+      this.vx = this.vx * -1;
+    }
+
+    if(this.y < 25 || this.y >= 375){
+      this.vy = this.vy * -1;
+    }
+  }
+
+}
+  var ball1;
+
 function setup() {
 	createCanvas(500, 400);
+  ball1 = new Ball (30,200,20,20,3,3, "blue");
 }
-
-var [xpos, ypos, xspeed, yspeed] = [225, 225, 0, 0];
 
 function draw() {
-	background(225);
-	
-	fill(0);
-	text("Use the arrow keys (or WASD) to move the square around", 25, 25);
-	
-	fill(0, 255, 0);
-	rect(xpos, ypos, 50, 50);
-	
-	if(xpos >= 0 && xpos + 50 <= 500) xpos += xspeed;
-	if(ypos >= 0 && ypos + 50 <= 500) ypos += yspeed;
-}
+  background(225);
 
-function keyPressed() {
-	switch(keyCode) {
-		case 37:
-		case 65:
-			xspeed = -2;
-			break;
-		case 39:
-		case 68:
-			xspeed = 2;
-			break;
-		case 38:
-		case 87:
-			yspeed = -2;
-			break;
-		case 40:
-		case 83:
-			yspeed = 2;
-			break;
-	}
-}
-
-function keyReleased() {
-	switch(keyCode) {
-		case 37:
-		case 65:
-			xspeed = 0;
-			break;
-		case 39:
-		case 68:
-			xspeed = 0;
-			break;
-		case 38:
-		case 87:
-			yspeed = 0;
-			break;
-		case 40:
-		case 83:
-			yspeed = 0;
-			break;
-	}
+  ball1.draw();
 }
