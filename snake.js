@@ -10,12 +10,15 @@ function Snake(){
   }
 
   this.update = function(){
-    this.x = this.x + this.xspeed;
-    this.y = this.y + this.yspeed;
+    this.x = this.x + this.xspeed * scl;
+    this.y = this.y + this.yspeed * scl;
+
+    this.x = constrain(this.x, 0, width - scl);
+    this.y = constrain(this.y, 0, height - scl);
   }
 
   this.show = function(){
     fill('blue')
-    ellipse(this.x, this.y, 20, 20);
+    ellipse(this.x, this.y, scl, scl);
   }
 }

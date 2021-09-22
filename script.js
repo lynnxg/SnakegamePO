@@ -5,6 +5,7 @@ function setup() {
 	createCanvas(600, 436);
   bg = loadImage('snake.jpg');
   s = new Snake;
+  frameRate(10);
 }
 
 var [xpos, ypos, xspeed, yspeed] = [225, 225, 0, 0];
