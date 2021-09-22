@@ -1,5 +1,6 @@
 var s;
 var scl = 20;
+var food;
 
 function setup() {
 	createCanvas(600, 436);
