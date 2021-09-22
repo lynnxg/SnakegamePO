@@ -1,17 +1,27 @@
 function setup() {
-	createCanvas(500, 400);
+	createCanvas(600, 436);
+  bg = loadImage('snake.jpg');
 }
 
 var [xpos, ypos, xspeed, yspeed] = [225, 225, 0, 0];
 
 function draw() {
-	background(225);
+	background(bg);
 	
 	fill('blue');
 	ellipse(xpos, ypos, 20, 20);
 	
 	if(xpos >= 0 && xpos + 50 <= 500) xpos += xspeed;
 	if(ypos >= 0 && ypos + 50 <= 500) ypos += yspeed;
+}
+
+function Snake(){
+  this.x = 0;
+  this.y = 0;
+  this.xspeed = 1;
+  this.yspeed = 0;
+
+
 }
 
 function keyPressed() {
