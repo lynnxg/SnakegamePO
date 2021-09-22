@@ -9,7 +9,8 @@ function setup() {
 var [xpos, ypos, xspeed, yspeed] = [225, 225, 0, 0];
 
 function draw() {
-	background(bg);
+	background(255);
+  background(bg);
 	s.update();
   s.show();
 	if(xpos >= 0 && xpos + 50 <= 500) xpos += xspeed;
