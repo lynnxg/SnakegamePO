@@ -9,6 +9,15 @@ function Snake(){
     this.yspeed = y;
   }
 
+  this.eat = function(pos){
+    var d = dist(this.x, this.y, pos.x, pos.y);
+    if (d <1){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   this.update = function(){
     this.x = this.x + this.xspeed * scl;
     this.y = this.y + this.yspeed * scl;
