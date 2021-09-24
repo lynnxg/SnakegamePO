@@ -1,49 +1,57 @@
-var s;
-var scl = 20;
-var food;
+let snake;
+let rez = 20;
+let food;
+let w;
+let h;
 
 function setup() {
-	createCanvas(600, 436);
+  createCanvas(600, 436);
   bg = loadImage('snake.jpg');
-  s = new Snake;
+  w = floor(width / rez);
+  h = floor(height / rez);
   frameRate(10);
-  pickLocation();
+  snake = new Snake();
+  foodLocation();
 }
 
-var [xpos, ypos, xspeed, yspeed] = [225, 225, 0, 0];
+function foodLocation() {
+  let x = floor(random(w));
+  let y = floor(random(h));
+  food = createVector(x, y);
+}
 
-function pickLocation(){
-  var cols = floor(width/scl);
-  var rows = floor(height/scl);
-  food = createVector(floor(random(cols)), floor(random(rows)));
-  food.mult(scl);
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+    snake.setDir(-1, 0);
+  } else if (keyCode === RIGHT_ARROW) {
+    snake.setDir(1, 0);
+  } else if (keyCode === DOWN_ARROW) {
+    snake.setDir(0, 1);
+  } else if (keyCode === UP_ARROW) {
+    snake.setDir(0, -1);
+  } else if (key == ' ') {
+    snake.grow();
+  }
+
 }
 
 function draw() {
 	background(255);
   background(bg);
-  s.death();
-	s.update();
-  s.show();
-
- if (s.eat(food)){
-   pickLocation();
- }
-  
-	if(xpos >= 0 && xpos + 50 <= 500) xpos += xspeed;
-	if(ypos >= 0 && ypos + 50 <= 500) ypos += yspeed;
-  fill('red')
-  ellipse(food.x, food.y, scl, scl)
-}
-
-function keyPressed() {
-	if (keyCode === UP_ARROW){
-    s.dir(0,-1);
-  } else if (keyCode === DOWN_ARROW){
-    s.dir(0,1);
-  } else if (keyCode === RIGHT_ARROW){
-    s.dir(1,0);
-  } else if (keyCode === LEFT_ARROW){
-    s.dir(-1,0);
+  if (snake.eat(food)) {
+    foodLocation();
   }
+  snake.update();
+  snake.show();
+
+
+  if (snake.endGame()) {
+    print("END GAME");
+    background('red');
+    noLoop();
+  }
+
+  noStroke();
+  fill(255, 0, 0);
+  ellipse(food.x, food.y, 20, 20);
 }
