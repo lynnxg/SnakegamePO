@@ -5,11 +5,10 @@ let w;
 let h;
 
 function setup() {
-  createCanvas(600, 436);
-  bg = loadImage('snake.jpg');
+  createCanvas(400, 400);
   w = floor(width / rez);
   h = floor(height / rez);
-  frameRate(10);
+  frameRate(5);
   snake = new Snake();
   foodLocation();
 }
@@ -18,6 +17,7 @@ function foodLocation() {
   let x = floor(random(w));
   let y = floor(random(h));
   food = createVector(x, y);
+
 }
 
 function keyPressed() {
@@ -36,8 +36,8 @@ function keyPressed() {
 }
 
 function draw() {
-	background(255);
-  background(bg);
+  scale(rez);
+  background(220);
   if (snake.eat(food)) {
     foodLocation();
   }
@@ -47,11 +47,11 @@ function draw() {
 
   if (snake.endGame()) {
     print("END GAME");
-    background('red');
+    background(255, 0, 0);
     noLoop();
   }
 
   noStroke();
   fill(255, 0, 0);
-  ellipse(food.x, food.y, 20, 20);
+  ellipse(food.x, food.y, 1, 1);
 }

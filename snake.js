@@ -56,7 +56,7 @@ class Snake {
   	for(let i = 0; i < this.body.length; i++) {
     	fill(0);
       noStroke();
-      ellipse(this.body[i].x, this.body[i].y, 20, 20)
+      ellipse(this.body[i].x, this.body[i].y, 1, 1)
     }
   }
 
