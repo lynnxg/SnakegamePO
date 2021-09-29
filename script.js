@@ -35,9 +35,15 @@ function keyPressed() {
 
 }
 
-function draw() {
-  scale(rez);
+function draw(){
   background(220);
+
+  
+}
+
+function game() {
+  scale(rez);
+  
   if (snake.eat(food)) {
     foodLocation();
   }
