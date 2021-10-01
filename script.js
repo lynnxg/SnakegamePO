@@ -3,6 +3,7 @@ let rez = 20;
 let food;
 let w;
 let h;
+let gameState = 0;
 
 function setup() {
   createCanvas(400, 400);
@@ -33,10 +34,35 @@ function keyPressed() {
     snake.grow();
   }
 
+  console.log(keyCode);
+
+  if (keyCode == 49) {
+    gameState = 0;
+  }
+
+  if (keyCode == 13) {
+    gameState = 1;
+  }
+
 }
 
 function draw(){
   background(220);
+  fill(0);
+  textSize(62);
+  text("gameState" + gameState, 25, 25);
+
+  if (gameState == 0) {
+    background("green");
+    text("Snake", 170, 60);  
+    
+  }
+
+  if (gameState == 1) {
+    background("yellow");
+    text("GAME RUNNING", 25, 45);
+    game();
+  }
 
   
 }
