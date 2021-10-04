@@ -5,6 +5,10 @@ let w;
 let h;
 let gameState = 0;
 
+function preload() {
+  img1 = loadImage("snake.jpg")
+}
+
 function setup() {
   createCanvas(400, 400);
   w = floor(width / rez);
@@ -44,45 +48,51 @@ function keyPressed() {
     gameState = 1;
   }
 
+
+
 }
 
-function draw(){
+
+function draw() {
   background(220);
   fill(0);
-  textSize(62);
+
   text("gameState" + gameState, 25, 25);
 
   if (gameState == 0) {
+    textSize(62);
     background("green");
-    text("Snake", 170, 60);  
-    
+    text("Snits", 130, 60);
+    image(img1, 0, 100, 400, 200);
   }
 
   if (gameState == 1) {
     background("yellow");
-    text("GAME RUNNING", 25, 45);
     game();
   }
 
-  
+  if (gameState == 2) {
+    textSize(62);
+    background(255, 0, 0);
+    fill('black');
+    text("Game Over", 40, 80);
+    text("")
+  }
 }
 
 function game() {
   scale(rez);
-  
+
   if (snake.eat(food)) {
     foodLocation();
   }
   snake.update();
   snake.show();
 
-
   if (snake.endGame()) {
-    print("END GAME");
-    background(255, 0, 0);
-    noLoop();
+    console.log("endGame");
+    gameState = 2;
   }
-
   noStroke();
   fill(255, 0, 0);
   ellipse(food.x, food.y, 1, 1);
