@@ -4,9 +4,11 @@ let food;
 let w;
 let h;
 let gameState = 0;
+let song;
 
 function preload() {
-  img1 = loadImage("snake.jpg")
+  img1 = loadImage("snake.jpg");
+  song = loadSound('super-feyenoord.mp3');
 }
 
 function setup() {
@@ -16,7 +18,7 @@ function setup() {
   frameRate(5);
   snake = new Snake();
   foodLocation();
-  song = loadSound('super-feyenoord.mp3');
+ 
 }
 
 function foodLocation() {
