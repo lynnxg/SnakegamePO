@@ -16,6 +16,7 @@ function setup() {
   frameRate(5);
   snake = new Snake();
   foodLocation();
+  song = loadSound('super-feyenoord.mp3');
 }
 
 function foodLocation() {
@@ -60,9 +61,17 @@ function draw() {
   text("gameState" + gameState, 25, 25);
 
   if (gameState == 0) {
+    if (song.isPlaying()) {
+      // .isPlaying() returns a boolean
+      song.stop();
+    } else {
+      song.play();
+    }
     textSize(62);
     background("green");
     text("Snits", 130, 60);
+    textSize(25);
+    text("press enter to start the game", 50, 350);
     image(img1, 0, 100, 400, 200);
   }
 
@@ -76,7 +85,9 @@ function draw() {
     background(255, 0, 0);
     fill('black');
     text("Game Over", 40, 80);
-    text("")
+    textSize(25);
+    text("press enter to restart the game",40, 200);
+    snake = new Snake();
   }
 }
 
