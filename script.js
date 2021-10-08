@@ -5,10 +5,14 @@ let w;
 let h;
 let gameState = 0;
 let song;
+let eatSound;
+let gameoverSound;
 
 function preload() {
   img1 = loadImage("snake.jpg");
   song = loadSound('super-feyenoord.mp3');
+  eatSound = loadSound('eat.wav');
+  gameoverSound = loadSound('gameover.wav');
 }
 
 function setup() {
@@ -50,9 +54,6 @@ function keyPressed() {
   if (keyCode == 13) {
     gameState = 1;
   }
-
-
-
 }
 
 
@@ -63,12 +64,7 @@ function draw() {
   text("gameState" + gameState, 25, 25);
 
   if (gameState == 0) {
-    if (song.isPlaying()) {
-      // .isPlaying() returns a boolean
-      song.stop();
-    } else {
-      song.play();
-    }
+    song.play();
     textSize(62);
     background("green");
     text("Snits", 130, 60);
@@ -83,6 +79,7 @@ function draw() {
   }
 
   if (gameState == 2) {
+    gameoverSound.play();
     textSize(62);
     background(255, 0, 0);
     fill('black');
@@ -97,6 +94,7 @@ function game() {
   scale(rez);
 
   if (snake.eat(food)) {
+    eatSound.play();
     foodLocation();
   }
   snake.update();
