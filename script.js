@@ -74,12 +74,14 @@ function draw() {
   }
 
   if (gameState == 1) {
+    song.stop();
     background("yellow");
     game();
   }
 
   if (gameState == 2) {
-    gameoverSound.play();
+    song.stop();
+    
     textSize(62);
     background(255, 0, 0);
     fill('black');
@@ -96,12 +98,14 @@ function game() {
   if (snake.eat(food)) {
     eatSound.play();
     foodLocation();
+
+    // new Food()
   }
   snake.update();
   snake.show();
 
   if (snake.endGame()) {
-    console.log("endGame");
+    gameoverSound.play();
     gameState = 2;
   }
   noStroke();
