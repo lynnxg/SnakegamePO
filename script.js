@@ -21,16 +21,9 @@ function setup() {
   h = floor(height / rez);
   frameRate(5);
   snake = new Snake();
-  foodLocation();
  
 }
 
-function foodLocation() {
-  let x = floor(random(w));
-  let y = floor(random(h));
-  food = createVector(x, y);
-
-}
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW) {
@@ -96,10 +89,8 @@ function game() {
   scale(rez);
 
   if (snake.eat(food)) {
-    eatSound.play();
-    foodLocation();
-
-    // new Food()
+    food = new Food();
+    eat.play();
   }
   snake.update();
   snake.show();
@@ -109,6 +100,4 @@ function game() {
     gameState = 2;
   }
   noStroke();
-  fill(255, 0, 0);
-  ellipse(food.x, food.y, 1, 1);
 }
