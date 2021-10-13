@@ -4,7 +4,7 @@ let food;
 let food2;
 let w;
 let h;
-let gameState = 1;
+let gameState = 0;
 let song;
 let eatSound;
 let gameoverSound;
@@ -95,10 +95,15 @@ function game() {
   food2.draw();
 
   if (snake.eat(food.pos)) {
-    food = new Food();
+    food = new Food();   
+    eatSound.play();
+  }
+
+  if (snake.eat(food2.pos)) {  
     food2 = new Food();
     eatSound.play();
   }
+
   snake.update();
   snake.show();
 
