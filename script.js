@@ -1,9 +1,10 @@
 let snake;
 let rez = 20;
 let food;
+let food2;
 let w;
 let h;
-let gameState = 0;
+let gameState = 1;
 let song;
 let eatSound;
 let gameoverSound;
@@ -21,7 +22,10 @@ function setup() {
   h = floor(height / rez);
   frameRate(5);
   snake = new Snake();
- 
+  food = new Food();
+  food2 = new Food();
+  noStroke();
+
 }
 
 
@@ -45,6 +49,7 @@ function keyPressed() {
   }
 
   if (keyCode == 13) {
+    song.stop();
     gameState = 1;
   }
 }
@@ -52,8 +57,6 @@ function keyPressed() {
 
 function draw() {
   background(220);
-  fill(0);
-
   text("gameState" + gameState, 25, 25);
 
   if (gameState == 0) {
@@ -67,30 +70,34 @@ function draw() {
   }
 
   if (gameState == 1) {
-    song.stop();
-    background("yellow");
     game();
   }
 
   if (gameState == 2) {
     song.stop();
-    
+
     textSize(62);
     background(255, 0, 0);
     fill('black');
     text("Game Over", 40, 80);
     textSize(25);
-    text("press enter to restart the game",40, 200);
+    text("press enter to restart the game", 40, 200);
     snake = new Snake();
   }
 }
 
 function game() {
+  background("yellow");
   scale(rez);
 
-  if (snake.eat(food)) {
+
+  food.draw();
+  food2.draw();
+
+  if (snake.eat(food.pos)) {
     food = new Food();
-    eat.play();
+    food2 = new Food();
+    eatSound.play();
   }
   snake.update();
   snake.show();
@@ -98,6 +105,5 @@ function game() {
   if (snake.endGame()) {
     gameoverSound.play();
     gameState = 2;
-  }
-  noStroke();
+  }  
 }
